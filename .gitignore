@@ -1,0 +1,14 @@
+# 絕對不能上傳的東西 — API key 在這裡
+.env
+
+# Python 自動產生的垃圾
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+
+# 編輯器
+.vscode/
+.idea/
+.DS_Store
