@@ -1,0 +1,14 @@
+# 本機記憶（不上傳 GitHub）
+CLAUDE.local.md
+.claude/settings.local.json
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# 環境變數（含 API key，絕對不能 commit）
+.env
+.env.*
+!.env.example
