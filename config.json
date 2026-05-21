@@ -1,0 +1,9 @@
+{
+  "drive_root_folder": "line 照片",
+  "groups": [
+    "2025全瑩TWBIO_大群"
+  ],
+  "filename_pattern": "{date}_{group}_{activity}_{seq:03d}",
+  "date_format": "%Y-%m-%d",
+  "make_link_anyone_with_link": true
+}
