@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <!-- 修正手機卡頓的關鍵：正確的 viewport + 禁止自動縮放 -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="theme-color" content="#9b6fd4" />
+  <title>集點卡 · 爸媽專區</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div id="app">
+    <!-- 頂部標題列 -->
+    <header class="topbar">
+      <!-- 左上叉叉：用真正的 <button>，足夠的點擊範圍與 z-index，確保可點 -->
+      <button id="closeBtn" class="close-btn" type="button" aria-label="關閉">
+        <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+          <path d="M6 6 L18 18 M18 6 L6 18" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
+        </svg>
+      </button>
+      <h1 class="topbar-title">爸媽專區 · <span id="childName">媽媽</span></h1>
+    </header>
+
+    <!-- 分頁 -->
+    <nav class="tabs" role="tablist">
+      <button class="tab" data-tab="stamp" role="tab">蓋章</button>
+      <button class="tab is-active" data-tab="redeem" role="tab">兌換</button>
+      <button class="tab" data-tab="history" role="tab">歷史</button>
+      <button class="tab" data-tab="settings" role="tab">設定</button>
+    </nav>
+
+    <main class="content">
+      <!-- 蓋章 -->
+      <section class="panel" data-panel="stamp" hidden>
+        <div class="count-card">
+          <span id="stampOwnerStamp">April</span> 現在有
+          <strong class="count-num" id="countStamp">0</strong> 個印章
+        </div>
+        <div class="stamp-actions">
+          <button class="btn btn-primary" id="addStampBtn" type="button">＋ 蓋一個章</button>
+          <button class="btn btn-ghost" id="removeStampBtn" type="button">－ 取消一個章</button>
+        </div>
+        <div class="stamp-grid" id="stampGrid"></div>
+      </section>
+
+      <!-- 兌換 -->
+      <section class="panel" data-panel="redeem">
+        <div class="count-card">
+          <span id="stampOwner">April</span> 現在有
+          <strong class="count-num" id="count">0</strong> 個印章
+        </div>
+        <div class="reward-list" id="rewardList"></div>
+      </section>
+
+      <!-- 歷史 -->
+      <section class="panel" data-panel="history" hidden>
+        <div class="history-head">
+          <h2>兌換與蓋章紀錄</h2>
+          <button class="btn btn-ghost btn-sm" id="clearHistoryBtn" type="button">清除紀錄</button>
+        </div>
+        <ul class="history-list" id="historyList"></ul>
+        <p class="empty" id="historyEmpty" hidden>還沒有任何紀錄</p>
+      </section>
+
+      <!-- 設定 -->
+      <section class="panel" data-panel="settings" hidden>
+        <label class="field">
+          <span>孩子名稱</span>
+          <input type="text" id="nameInput" />
+        </label>
+        <button class="btn btn-primary" id="saveNameBtn" type="button">儲存</button>
+      </section>
+    </main>
+  </div>
+
+  <!-- 兌換成功提示 -->
+  <div class="toast" id="toast" hidden></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
