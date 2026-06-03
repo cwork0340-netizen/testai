@@ -1,0 +1,267 @@
+:root {
+  --purple: #9b6fd4;
+  --purple-dark: #7d52bd;
+  --purple-light: #efe8fb;
+  --green: #4caf7d;
+  --green-dark: #3f9a6c;
+  --ink: #2f2546;
+  --muted: #9a93a8;
+  --bg: #f4f0fb;
+  --card-green-bg: #eef9f1;
+  --card-green-border: #cdeed7;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang TC", "Noto Sans TC", "Segoe UI", Roboto, sans-serif;
+  /* 修正卡頓：避免雙擊縮放延遲、移除點擊高亮、平滑捲動 */
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  overscroll-behavior: none;
+}
+
+#app {
+  max-width: 480px;
+  margin: 0 auto;
+  min-height: 100vh;
+  min-height: 100dvh;
+  background: var(--bg);
+}
+
+/* 頂部列 */
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: var(--purple);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 16px;
+  padding-top: calc(14px + env(safe-area-inset-top));
+}
+
+/* 左上叉叉：明確的尺寸與層級，pointer-events 保證可點 */
+.close-btn {
+  flex: 0 0 auto;
+  width: 40px;
+  height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.18);
+  color: #fff;
+  cursor: pointer;
+  position: relative;
+  z-index: 11;
+  pointer-events: auto;
+  -webkit-appearance: none;
+  appearance: none;
+  padding: 0;
+  transition: background 0.15s ease;
+}
+.close-btn:active { background: rgba(255, 255, 255, 0.34); }
+
+.topbar-title {
+  font-size: 20px;
+  font-weight: 700;
+  margin: 0;
+  line-height: 1.2;
+}
+
+/* 分頁 */
+.tabs {
+  display: flex;
+  background: #fff;
+  border-bottom: 1px solid #ece6f6;
+  position: sticky;
+  top: calc(68px + env(safe-area-inset-top));
+  z-index: 9;
+}
+.tab {
+  flex: 1;
+  border: none;
+  background: none;
+  padding: 16px 4px;
+  font-size: 16px;
+  color: var(--muted);
+  cursor: pointer;
+  position: relative;
+  -webkit-appearance: none;
+  appearance: none;
+}
+.tab.is-active { color: var(--purple-dark); font-weight: 700; }
+.tab.is-active::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 0;
+  width: 56px;
+  height: 3px;
+  border-radius: 3px;
+  background: var(--purple-dark);
+}
+
+/* 內容 */
+.content { padding: 16px; }
+.panel[hidden] { display: none; }
+
+.count-card {
+  background: var(--purple-light);
+  border-radius: 16px;
+  padding: 28px 16px;
+  text-align: center;
+  font-size: 18px;
+  color: var(--ink);
+  margin-bottom: 18px;
+}
+.count-num {
+  color: var(--purple-dark);
+  font-size: 40px;
+  font-weight: 800;
+  margin: 0 6px;
+  vertical-align: -2px;
+}
+
+/* 兌換清單 */
+.reward-list { display: flex; flex-direction: column; gap: 14px; }
+.reward {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  background: var(--card-green-bg);
+  border: 1.5px solid var(--card-green-border);
+  border-radius: 16px;
+  padding: 18px;
+}
+.reward.is-locked {
+  background: #f5f5f7;
+  border-color: #e6e4ea;
+}
+.reward-info { min-width: 0; }
+.reward-cost { font-size: 13px; color: var(--muted); font-weight: 600; }
+.reward-title { font-size: 19px; font-weight: 700; margin: 4px 0 2px; }
+.reward-sub { font-size: 13px; color: var(--muted); }
+
+.redeem-btn {
+  flex: 0 0 auto;
+  border: none;
+  background: var(--green);
+  color: #fff;
+  font-size: 17px;
+  font-weight: 700;
+  padding: 14px 22px;
+  border-radius: 14px;
+  cursor: pointer;
+  min-width: 84px;
+  min-height: 48px;
+  -webkit-appearance: none;
+  appearance: none;
+}
+.redeem-btn:active { background: var(--green-dark); }
+.redeem-btn:disabled {
+  background: #c9c7cf;
+  cursor: not-allowed;
+}
+
+/* 蓋章 */
+.stamp-actions { display: flex; gap: 10px; margin-bottom: 18px; }
+.btn {
+  border: none;
+  border-radius: 14px;
+  padding: 14px 18px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  min-height: 48px;
+  -webkit-appearance: none;
+  appearance: none;
+}
+.btn-sm { padding: 8px 12px; font-size: 14px; min-height: 0; }
+.btn-primary { background: var(--purple); color: #fff; }
+.btn-primary:active { background: var(--purple-dark); }
+.btn-ghost { background: #fff; color: var(--purple-dark); border: 1.5px solid #e0d6f3; }
+
+.stamp-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 12px;
+}
+.stamp-dot {
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: #fff;
+  border: 2px dashed #d8cef0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+}
+.stamp-dot.filled {
+  background: var(--purple);
+  border-style: solid;
+  border-color: var(--purple);
+}
+
+/* 歷史 */
+.history-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
+.history-head h2 { font-size: 17px; margin: 0; }
+.history-list { list-style: none; margin: 0; padding: 0; }
+.history-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  background: #fff;
+  border-radius: 12px;
+  padding: 14px;
+  margin-bottom: 10px;
+}
+.history-item .h-main { min-width: 0; }
+.history-item .h-title { font-weight: 700; }
+.history-item .h-sub { font-size: 13px; color: var(--muted); margin-top: 2px; }
+.history-item .h-time { font-size: 12px; color: var(--muted); white-space: nowrap; }
+.history-item.is-stamp .h-title::before { content: "🟣 "; }
+.history-item.is-redeem .h-title::before { content: "🎁 "; }
+.empty { text-align: center; color: var(--muted); padding: 40px 0; }
+
+/* 設定 */
+.field { display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px; }
+.field span { font-size: 14px; color: var(--muted); font-weight: 600; }
+.field input {
+  border: 1.5px solid #e0d6f3;
+  border-radius: 12px;
+  padding: 14px;
+  font-size: 16px;
+}
+
+/* Toast */
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: calc(28px + env(safe-area-inset-bottom));
+  transform: translateX(-50%) translateY(10px);
+  background: rgba(47, 37, 70, 0.95);
+  color: #fff;
+  padding: 12px 20px;
+  border-radius: 24px;
+  font-size: 15px;
+  z-index: 50;
+  opacity: 0;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  pointer-events: none;
+  max-width: 90%;
+  text-align: center;
+}
+.toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
